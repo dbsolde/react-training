@@ -1,5 +1,5 @@
 # Ignore auto-generated stuf into git
-node_modules
+node_modules/
 
 # Cruft
 .DS_Store
@@ -8,5 +8,10 @@ npm-debug.log
 .vscode
 
 # npm
-npm-debug.log.*
 .env
+template/src/__tests__/__snapshots__/
+lerna-debug.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+/.changelog
