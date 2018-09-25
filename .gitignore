@@ -1,0 +1,12 @@
+# Ignore auto-generated stuf into git
+node_modules
+
+# Cruft
+.DS_Store
+npm-debug.log
+.idea
+.vscode
+
+# npm
+npm-debug.log.*
+.env
