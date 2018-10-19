@@ -1,0 +1,9 @@
+.lists {
+    width: 400px;
+    margin: 30px auto;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+}
