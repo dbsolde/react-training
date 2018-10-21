@@ -1,0 +1,8 @@
+.textStyle {
+	font-size: 72;
+	font-family: "sans-serif";
+	color: #333;
+	font-weight: bold;
+	border-top: 1px solid #c0c0c0;
+	display:block;
+}

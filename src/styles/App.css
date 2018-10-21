@@ -26,6 +26,8 @@ body {
 
 .App-intro {
   font-size: large;
+  width: 500px;
+  margin: 0 auto;
 }
 
 @keyframes App-logo-spin {
