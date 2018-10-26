@@ -1,10 +1,10 @@
 import React from 'react';
 import List from '../List'
-import './lists.css';
+import { StyledLists } from '../../styled/app'
 
 const Lists = ({ data, deleteItem }) => {
     return(
-        <ul className="lists">
+        <StyledLists>
             {data && data.map( (list) =>
                 <List 
                     name={list.name} 
@@ -12,7 +12,7 @@ const Lists = ({ data, deleteItem }) => {
                     deleteItem={deleteItem}
                 />
             )}
-        </ul>
+        </StyledLists>
     )
 }
 

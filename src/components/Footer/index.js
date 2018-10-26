@@ -1,11 +1,14 @@
 import React from 'react';
-import './footer.css'
+import styled from 'styled-components'
 
+const StyledFooter = styled.footer`
+    text-align:left;
+`
 const Footer = () => {
     return(
-        <footer>
+        <StyledFooter>
             OS
-        </footer>
+        </StyledFooter>
     )
 }
 

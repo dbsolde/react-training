@@ -1,15 +1,14 @@
 import React from 'react';
-import './input.css';
+import { StyledInput } from '../../styled/input'
 
-const TextInput = ({ value , onChange}) => {
+export default  ({ value , onChange}) => {
     return(
-        <input 
+        <StyledInput 
             placeholder="Enter task"
             type="text" 
             className="input"
             value={value}
-            onChange={onChange}/>
+            onChange={onChange} />
     )
 }
 
-export default TextInput

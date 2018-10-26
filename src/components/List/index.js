@@ -1,14 +1,14 @@
 import React from 'react';
-import './list.css';
+import { StyledLi, StyledLiSpan } from '../../styled/app'
 
 const List = ({ id, name, deleteItem }) => {
     return (
-        <li key={id}>
+        <StyledLi key={id}>
             {name} 
-            <span onClick={ () => deleteItem(id)} >
+            <StyledLiSpan onClick={ () => deleteItem(id)} >
                 [done]
-            </span>
-        </li>
+            </StyledLiSpan>
+        </StyledLi>
     )
 }
 

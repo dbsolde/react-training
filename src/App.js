@@ -4,7 +4,16 @@ import Footer from './components/Footer'
 import Lists from './components/Lists'
 import Button from './components/Button'
 import TextInput from './components/TextInput'
-import './styles/App.css';
+
+import { 
+  AppWrapper,
+  Form,
+  FormP,
+  Task,
+  Paragraph,
+  Span
+} from './styled/app'
+
 
 const data = [
   {
@@ -38,6 +47,7 @@ class App extends Component {
   handleChange = e => {
     const value = e.target.value
     const currentItem = { id: Date.now(), name: value }
+    console.log(currentItem,'currentItem')
     this.setState({ currentItem })
   }
   
@@ -51,7 +61,7 @@ class App extends Component {
         currentItem: { id: 0, name: ''}
       })
     }
-    // console.log('added item', this.state.currentItem)
+    console.log('added item', this.state.currentItem)
   }
 
   handleDeleteItem = id => {
@@ -61,29 +71,31 @@ class App extends Component {
     this.setState({
       items: filteredItems
     })
-    // console.log('deleted ID: ',id)
+    console.log('deleted ID: ',id)
   }
 
   render() {
     const { items, currentItem } = this.state
     return (
-      <div className="App">
+      <AppWrapper>
         <Header />
-          <div className="countTask">
-            <p>TASKS</p>
-            <span>My list ({items.length})</span>
-          </div>
-          <form className="form" onSubmit={this.handleSubmit}>
-              <p>ADD TODO</p>
+          <Task>
+            <Paragraph>TASKS</Paragraph>
+            <Span>My list ({items.length})</Span>
+          </Task>
+          <Form>
+              <FormP>ADD TODO</FormP>
               <TextInput 
                 value={currentItem.name}
                 onChange={this.handleChange}
               />
-              <Button name="Submit" />
-          </form>
-          <Lists data={items} deleteItem={this.handleDeleteItem} />
+              <Button name="Submit" onClick={this.handleSubmit}/>
+          </Form>
+          <Lists 
+            data={items} 
+            deleteItem={this.handleDeleteItem} />
         <Footer />
-      </div>
+      </AppWrapper>
     );
   }
 }

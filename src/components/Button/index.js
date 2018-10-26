@@ -1,9 +1,11 @@
 import React from 'react';
-import './button.css';
+import { 
+    StyledButton
+} from '../../styled/app'
 
-const Button = ({ name }) => {
+const Button = ({ name, onClick }) => {
     return(
-        <button className="button">{name}</button>
+        <StyledButton className="button" onClick={onClick}>{name}</StyledButton>
     )
 }
 
