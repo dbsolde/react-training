@@ -1,11 +1,6 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 /*
-	* BrowserRouter
-	- should be used when you have a server that will handle dynamic requests
-	* HashRouter
-	- should be used for static websites
-	"Usually it is preferable to use a <BrowserRouter>, 
 	but if your website will be hosted on a server that only serves static files, then the <HashRouter> is a good solution."
 	* Switch
 	- Switch will iterate over its children elements (the routes) and only render the first one that matches the current pathname.
@@ -19,6 +14,13 @@ import ContactPage from '../pages/ContactPage'
 import TeamPage from '../pages/TeamPage'
 import TeamSingle from '../pages/TeamSingle'
 
+const NoMatch = ({ location }) => (
+	<div>
+		<h1>404 Page</h1>
+		<h3>No match for <code>{location.pathname}</code></h3>
+	</div>
+)
+
 export default () => (
 	<div>
 		<Switch>
@@ -27,6 +29,7 @@ export default () => (
 				<Route path="/our-team/:id" component={TeamSingle} />
 			<Route path="/about" component={AboutPage} />
 			<Route path="/contact-us" component={ContactPage} />
+			<Route component={NoMatch} />
 		</Switch>
 	</div>
 )
