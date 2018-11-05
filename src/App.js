@@ -5,67 +5,80 @@ import Lists from './components/Lists'
 import Button from './components/Button'
 import TextInput from './components/TextInput'
 import './styles/App.css';
+import axios from 'axios'
 
-const data = [
-  {
-    "id": 1,
-    "name": "Go Shopping"
-  },
-  {
-    "id": 2,
-    "name": "Call the telephone Company"
-  },
-  {
-    "id": 3,
-    "name": "Call mother"
-  },
-  {
-    "id": 4,
-    "name": "learn react.js"
-  },
-  {
-    "id": 5,
-    "name": "get some eggs"
-  },
-]
+const url = 'https://jsonplaceholder.typicode.com'
 
 class App extends Component {
   state = {
-    items: data,
-    currentItem: { id: 0, name: '' }
+    items: [],
+    title: ''
+  }
+
+  componentDidMount() {
+    axios.get(`${url}/todos`)
+      .then( result => {
+        // console.log(result)
+        // console.log(result.data)
+        this.setState({ items: result.data })
+      })
+      .catch( err => {
+        console.log(err)  // log the error
+      })
   }
 
   handleChange = e => {
     const value = e.target.value
-    const currentItem = { id: Date.now(), name: value }
-    this.setState({ currentItem })
+    this.setState({ title: value })
   }
   
   handleSubmit = e => {
     e.preventDefault()
-    const newItem = this.state.currentItem
-    if (newItem.name !== '') {
-      const items = [...this.state.items, newItem]
-      this.setState({
-        items: items,
-        currentItem: { id: 0, name: ''}
-      })
+    
+    const newItem = {
+      title: this.state.title,
+      completed: false,
+      userId: 1
     }
-    // console.log('added item', this.state.currentItem)
+
+    if (newItem.title !== '') {
+      axios.post(`${url}/todos`,  newItem )
+      .then( res => {
+        // console.log(res)
+        // console.log(res.data)
+        const items = [...this.state.items, res.data]
+        this.setState({
+          items: items,
+          title: ''
+        })
+      })
+      .catch( err => {
+        console.log(err) // log the error
+      })  
+    }
+
   }
 
   handleDeleteItem = id => {
-    const filteredItems = this.state.items.filter( item => {
-      return item.id !== id
-    })
-    this.setState({
-      items: filteredItems
-    })
-    // console.log('deleted ID: ',id)
+    const del_url = `${url}/todos/${id}`
+    axios.delete(del_url)
+      .then( res => {
+        this.setState(previosState => {
+          console.log(previosState,'previosState')
+          return {
+            items: previosState.items.filter( i => i.id !== id)
+          }
+        })
+        // console.log(res)
+        // console.log(res.data)
+      })
+      .catch(err => {
+        console.log(err)  // log the error
+      })
   }
 
   render() {
-    const { items, currentItem } = this.state
+    const { items, title } = this.state
     return (
       <div className="App">
         <Header />
@@ -76,12 +89,14 @@ class App extends Component {
           <form className="form" onSubmit={this.handleSubmit}>
               <p>ADD TODO</p>
               <TextInput 
-                value={currentItem.name}
+                value={title}
                 onChange={this.handleChange}
               />
               <Button name="Submit" />
           </form>
-          <Lists data={items} deleteItem={this.handleDeleteItem} />
+          {items && 
+            <Lists data={items} deleteItem={this.handleDeleteItem} />
+          }
         <Footer />
       </div>
     );

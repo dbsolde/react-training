@@ -1,10 +1,10 @@
 import React from 'react';
 import './list.css';
 
-const List = ({ id, name, deleteItem }) => {
+const List = ({ id, title, completed, deleteItem }) => {
     return (
         <li key={id}>
-            {name} 
+            {title} 
             <span onClick={ () => deleteItem(id)} >
                 [done]
             </span>

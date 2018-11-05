@@ -2,18 +2,20 @@ import React from 'react';
 import List from '../List'
 import './lists.css';
 
-const Lists = ({ data, deleteItem }) => {
-    return(
-        <ul className="lists">
-            {data && data.map( (list) =>
+const Lists = ({ data, deleteItem }) => (
+    <ul className="lists">
+        {data && data.map( (list) => {
+            return (
                 <List 
-                    name={list.name} 
-                    id={list.id} 
+                    key={list.id}
+                    title={list.title} 
+                    id={list.id}
+                    completed={list.completed}
                     deleteItem={deleteItem}
                 />
-            )}
-        </ul>
-    )
-}
+            )
+        })}
+    </ul>
+)
 
 export default Lists
